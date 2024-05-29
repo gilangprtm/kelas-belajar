@@ -1,0 +1,1 @@
+export 'package:kelas_belajar/infrastructure/navigation/bindings/controllers/home.controller.binding.dart'; 
