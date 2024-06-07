@@ -1,4 +1,4 @@
-package com.edjavu.kelas_belajar
+package com.edjavu.kelasbelajar
 
 import io.flutter.embedding.android.FlutterActivity
 

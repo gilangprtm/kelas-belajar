@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "372023001972",
+    "project_id": "kelas-belajar-87d24",
+    "storage_bucket": "kelas-belajar-87d24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:372023001972:android:e4a31c823827810f25e221",
+        "android_client_info": {
+          "package_name": "com.edjavu.kelasbelajar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP2sRMDUxigTvoVMKj-TbJiaB1GfLB9_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
