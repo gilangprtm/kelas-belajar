@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kelas_belajar/infrastructure/mahas/mahas_config.dart';
 import 'package:kelas_belajar/infrastructure/theme/typografi.dart';
 import 'package:kelas_belajar/infrastructure/widget/mahas_badge.dart';
 import 'package:kelas_belajar/presentation/home/controllers/home.controller.dart';
@@ -48,7 +49,7 @@ class MobileLayout extends GetView<HomeController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Hi, Gilang Pratama',
+                Text(MahasConfig.userModel?.nama ?? '',
                     style: MahasTypography.headline6),
                 const Text('Mau Belajar Apa Hari Ini?',
                     style: MahasTypography.headline5),

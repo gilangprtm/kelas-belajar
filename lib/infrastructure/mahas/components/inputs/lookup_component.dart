@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import '../../mahas_config.dart';
 import '../../models/api_list_resut_model.dart';

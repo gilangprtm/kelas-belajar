@@ -5,7 +5,7 @@ class MahasSnackbar {
       {Color? backgroundColor,
       Duration duration = const Duration(seconds: 3)}) {
     final snackBar = SnackBar(
-      content: Text(message, style: TextStyle(color: Colors.white)),
+      content: Text(message, style: const TextStyle(color: Colors.white)),
       backgroundColor: backgroundColor,
       duration: duration,
     );
