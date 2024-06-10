@@ -8,19 +8,13 @@ import 'package:http/http.dart' as http;
 
 class HttpApi {
   static String? _apiToken;
-  static DateTime _apiTokenExpired = DateTime.now();
 
   static void clearToken() {
     _apiToken = null;
   }
 
   static Future<String?> _token() async {
-    var now = DateTime.now();
-    if (_apiToken == null || _apiTokenExpired.isBefore(now)) {
-      _apiTokenExpired = DateTime(
-          now.year, now.month, now.day, now.hour, now.minute + 59, now.second);
-      _apiToken = await auth.currentUser?.getIdToken(true);
-    }
+    _apiToken = await auth.currentUser?.getIdToken(true);
 
     return _apiToken;
   }
@@ -57,13 +51,6 @@ class HttpApi {
         urlX,
         headers: {
           'Authorization': token != null ? 'Bearer $token' : '',
-        },
-      ).timeout(
-        const Duration(seconds: 15),
-        onTimeout: () {
-          return http.Response(
-              'Error Request Timeout\nCek koneksi internet Anda dan coba beberapa saat lagi!',
-              408);
         },
       );
 

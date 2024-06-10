@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kelas_belajar/infrastructure/mahas/mahas_config.dart';
 import 'package:kelas_belajar/infrastructure/theme/typografi.dart';
 import 'package:kelas_belajar/infrastructure/widget/constant.dart';
 
@@ -47,7 +48,7 @@ class MobileLayout extends GetView<ProfileController> {
                   height: 10,
                 ),
                 Text(
-                  "Gilang Pratama",
+                  MahasConfig.userModel?.nama ?? '',
                   style: MahasTypography.subtitle1.copyWith(
                     color: Colors.white,
                   ),
@@ -61,17 +62,9 @@ class MobileLayout extends GetView<ProfileController> {
           height: 20,
         ),
         deviderText("Akun"),
-        taskCard(
-            text: "Edit Data Pribadi",
-            onPressed: () {
-              controller.login();
-            }),
+        taskCard(text: "Edit Data Pribadi", onPressed: () {}),
         deviderText("Pengaturan"),
-        taskCard(
-            text: "Bahasa",
-            onPressed: () {
-              controller.getUser();
-            }),
+        taskCard(text: "Bahasa", onPressed: () {}),
         taskCard(
             text: "Sign Out",
             onPressed: () {

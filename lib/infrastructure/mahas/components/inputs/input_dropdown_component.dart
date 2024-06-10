@@ -109,6 +109,7 @@ class InputDropdownController {
 
 class InputDropdownComponent extends StatefulWidget {
   final String? label;
+  final String? hint;
   final double? marginBottom;
   final bool required;
   final bool editable;
@@ -123,6 +124,7 @@ class InputDropdownComponent extends StatefulWidget {
     required this.controller,
     this.required = false,
     this.borderRadius,
+    this.hint,
   });
 
   @override
@@ -185,6 +187,7 @@ class _InputDropdownComponentState extends State<InputDropdownComponent> {
           ? Form(
               key: widget.controller._key,
               child: DropdownButtonFormField(
+                hint: Text(widget.hint ?? ""),
                 decoration: decoration,
                 isExpanded: true,
                 focusColor: Colors.transparent,
@@ -197,10 +200,6 @@ class _InputDropdownComponentState extends State<InputDropdownComponent> {
                           child: Text(e.text),
                         ))
                     .toList(),
-                style: TextStyle(
-                  color: MahasColors.dark.withOpacity(.7),
-                ),
-                dropdownColor: MahasColors.light,
                 menuMaxHeight: 300,
               ),
             )

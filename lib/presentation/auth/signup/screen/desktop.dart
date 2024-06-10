@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
-class TabletLayout extends StatelessWidget {
-  const TabletLayout({super.key});
+class DesktopLayout extends StatelessWidget {
+  const DesktopLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          height: 80,
+          height: 100,
           color: Colors.blue,
           child: const Center(
               child: Text('Header', style: TextStyle(color: Colors.white))),
@@ -17,7 +17,7 @@ class TabletLayout extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 200,
+                width: 250,
                 color: Colors.grey[300],
                 child: const Center(child: Text('Navigation')),
               ),
@@ -27,11 +27,16 @@ class TabletLayout extends StatelessWidget {
                   child: const Center(child: Text('Content')),
                 ),
               ),
+              Container(
+                width: 250,
+                color: Colors.grey[300],
+                child: const Center(child: Text('Sidebar')),
+              ),
             ],
           ),
         ),
         Container(
-          height: 80,
+          height: 100,
           color: Colors.blue,
           child: const Center(
               child: Text('Footer', style: TextStyle(color: Colors.white))),

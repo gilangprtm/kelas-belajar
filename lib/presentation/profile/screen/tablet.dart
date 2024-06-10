@@ -11,8 +11,7 @@ class TabletLayout extends StatelessWidget {
           height: 80,
           color: Colors.blue,
           child: const Center(
-              child:
-                  const Text('Header', style: TextStyle(color: Colors.white))),
+              child: Text('Header', style: TextStyle(color: Colors.white))),
         ),
         Expanded(
           child: Row(
