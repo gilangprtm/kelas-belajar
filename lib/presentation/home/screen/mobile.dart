@@ -50,15 +50,18 @@ class MobileLayout extends GetView<HomeController> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(MahasConfig.userModel?.nama ?? '',
-                    style: MahasTypography.headline6),
-                const Text('Mau Belajar Apa Hari Ini?',
-                    style: MahasTypography.headline5),
+                    style: MahasTypography.headline6.copyWith(
+                      overflow: TextOverflow.ellipsis,
+                    )),
+                Text(controller.taggar.value, style: MahasTypography.headline5),
                 const SizedBox(
                   height: 15,
                 ),
                 MahasButton(
                   text: 'Cari Kelasmu',
-                  onPressed: () {},
+                  onPressed: () {
+                    controller.cariKelas();
+                  },
                   type: ButtonType.primary,
                   height: 52,
                   elevation: 0,

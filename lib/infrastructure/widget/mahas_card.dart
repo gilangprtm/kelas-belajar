@@ -217,6 +217,7 @@ class MahasCustomizableCard extends StatelessWidget {
   final BorderRadius borderRadius;
   final double elevation;
   final double margin;
+  final double padding;
 
   const MahasCustomizableCard({
     super.key,
@@ -225,6 +226,7 @@ class MahasCustomizableCard extends StatelessWidget {
     this.borderRadius = MahasBorderRadius.medium,
     this.elevation = 1.0,
     this.margin = 10.0,
+    this.padding = 15.0,
   });
 
   @override
@@ -237,7 +239,7 @@ class MahasCustomizableCard extends StatelessWidget {
       elevation: elevation,
       margin: EdgeInsets.all(margin),
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(padding),
         child: child,
       ),
     );

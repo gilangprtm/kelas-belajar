@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kelas_belajar/infrastructure/mahas/mahas_config.dart';
+import 'package:kelas_belajar/infrastructure/navigation/routes.dart';
 import 'package:kelas_belajar/infrastructure/theme/typografi.dart';
 
 import '../../../infrastructure/widget/constant.dart';
@@ -8,6 +10,8 @@ import '../../../infrastructure/widget/mahas_image.dart';
 import '../../../infrastructure/widget/mahas_snackbar.dart';
 
 class HomeController extends GetxController {
+  RxString taggar = 'Mau Belajar Apa Hari Ini?'.obs;
+
   List<Widget> items = List.generate(10, (index) {
     return GestureDetector(
       onTap: () {
@@ -45,4 +49,16 @@ class HomeController extends GetxController {
       ),
     );
   });
+
+  @override
+  void onInit() {
+    if (MahasConfig.userModel?.role == 'Guru') {
+      taggar.value = 'Semangat Mengajar Hari Ini';
+    }
+    super.onInit();
+  }
+
+  void cariKelas() {
+    Get.toNamed(Routes.KELAS_LIST);
+  }
 }

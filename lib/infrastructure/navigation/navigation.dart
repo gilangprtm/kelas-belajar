@@ -61,5 +61,15 @@ class Nav {
       page: () => const SplashscreenScreen(),
       binding: SplashscreenControllerBinding(),
     ),
+    GetPage(
+      name: Routes.KELAS_SETUP,
+      page: () => const KelasSetupScreen(),
+      binding: KelasSetupControllerBinding(),
+    ),
+    GetPage(
+      name: Routes.KELAS_LIST,
+      page: () => const KelasListScreen(),
+      binding: KelasListControllerBinding(),
+    ),
   ];
 }
