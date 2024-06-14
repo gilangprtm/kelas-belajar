@@ -49,23 +49,19 @@ class MobileLayout extends GetView<SignupController> {
                   maxLines: 5,
                 ),
                 const SizedBox(height: 20),
-                Card(
-                  child: InputTextComponent(
-                    placeHolder: "Nama",
-                    marginBottom: 0,
-                    controller: controller.namaCon,
-                    editable: true,
-                    required: true,
-                  ),
+                InputTextComponent(
+                  placeHolder: "Nama",
+                  marginBottom: 0,
+                  controller: controller.namaCon,
+                  editable: true,
+                  required: true,
                 ),
-                Card(
-                  child: InputDropdownComponent(
-                    hint: "Sebagai",
-                    controller: controller.roleCon,
-                    editable: true,
-                    required: true,
-                    marginBottom: 0,
-                  ),
+                InputDropdownComponent(
+                  hint: "Sebagai",
+                  controller: controller.roleCon,
+                  editable: true,
+                  required: true,
+                  marginBottom: 0,
                 ),
                 const SizedBox(height: 10),
                 Padding(

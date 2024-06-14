@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import '../../../widget/constant.dart';
+import '../../../widget/mahas_button.dart';
 import '../../mahas_config.dart';
 import '../../models/api_result_model.dart';
 import '../../services/helper.dart';
@@ -252,17 +254,7 @@ class SetupPageController<T> extends ChangeNotifier {
             editable = false;
           }
         } else {
-          bool noInternet = MahasConfig.hasInternet!;
-          if (!noInternet) {
-            if (r.statusCode == 404) {
-              Helper.dialogWarning("Data tidak ditemukan atau sudah dihapus!");
-            } else {
-              Helper.dialogWarning(r.message);
-            }
-          } else {
-            Helper.dialogWarning(
-                "Gagal menyimpan data, silahkan cek koneksi internet");
-          }
+          Helper.dialogWarning(r.message);
           setState(() {
             editable = true;
           });
@@ -291,6 +283,7 @@ class SetupPageComponent extends StatefulWidget {
   final String title;
   final Function children;
   final bool showAppBar;
+  final Color appBackgroundColor;
   final dynamic crossAxisAlignmentChildren;
   final Function? titleFunction;
   final List<Widget>? childrenAfterButton;
@@ -305,6 +298,7 @@ class SetupPageComponent extends StatefulWidget {
     this.crossAxisAlignmentChildren = CrossAxisAlignment.center,
     this.titleFunction,
     this.showAppBar = true,
+    this.appBackgroundColor = MahasColors.primaryColor,
   });
 
   @override
@@ -332,6 +326,9 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
         appBar: !widget.showAppBar
             ? null
             : AppBar(
+                backgroundColor: widget.appBackgroundColor,
+                iconTheme: const IconThemeData(
+                    color: MahasColors.darkSecondaryLightColor),
                 title: Text(widget.title),
                 centerTitle: true,
                 actions: widget.controller._id == null ||
@@ -390,13 +387,17 @@ class _SetupPageComponentState extends State<SetupPageComponent> {
                       ),
                       Visibility(
                         visible: widget.controller.editable,
-                        child: Container(
-                          margin: EdgeInsets.symmetric(
-                              vertical: 0,
-                              horizontal: !widget.childrenPadding ? 10 : 0),
-                          child: ElevatedButton(
-                            onPressed: widget.controller.submitOnPressed,
-                            child: const Text('Simpan'),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5.0, vertical: 10),
+                          child: MahasButton(
+                            height: 48,
+                            isFullWidth: true,
+                            text: 'Simpan',
+                            onPressed: () {
+                              widget.controller.submitOnPressed();
+                            },
+                            borderRadius: MahasBorderRadius.medium,
                           ),
                         ),
                       ),

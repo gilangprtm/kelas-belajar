@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kelas_belajar/infrastructure/mahas/models/api_list_resut_model.dart';
 import 'package:kelas_belajar/infrastructure/mahas/services/http_api.dart';
+import 'package:kelas_belajar/infrastructure/navigation/routes.dart';
 
 import '../../../../domain/model/kelasmodel.dart';
 import '../../../../infrastructure/mahas/components/inputs/input_text_component.dart';
@@ -29,6 +30,10 @@ class KelasListController extends GetxController {
 
   void skeletonList() {
     items.addAll(List.generate(10, (index) => buildShimmerItem()).toList());
+  }
+
+  void createKelas() {
+    Get.toNamed(Routes.KELAS_SETUP);
   }
 
   Widget buildShimmerItem() {
@@ -81,7 +86,9 @@ class KelasListController extends GetxController {
                   const Spacer(),
                   Text(
                     item?.semester != null ? 'Semester ${item?.semester}' : '',
-                    style: MahasTypography.bodyText2,
+                    style: MahasTypography.bodyText1.copyWith(
+                      fontSize: 12,
+                    ),
                   ),
                 ],
               ),

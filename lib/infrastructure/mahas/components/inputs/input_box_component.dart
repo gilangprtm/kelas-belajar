@@ -48,7 +48,6 @@ class InputBoxComponent extends StatelessWidget {
                         children: [
                           Text(
                             label ?? '-',
-                            style: MahasThemes.muted,
                           ),
                           Text(
                             "*",
@@ -59,10 +58,8 @@ class InputBoxComponent extends StatelessWidget {
                       )
                     : Text(
                         label ?? '-',
-                        style: MahasThemes.muted,
                       ),
               ),
-              const Padding(padding: EdgeInsets.all(2)),
             ],
           ),
         ),
@@ -151,31 +148,33 @@ class InputBoxComponent extends StatelessWidget {
             ],
           ),
         ),
-        Visibility(
-          visible: children != null,
-          child: Column(
-            children: [
-              children ?? Container(),
-              Visibility(
-                visible: errorMessage != null,
-                child: Container(
-                  margin: const EdgeInsets.only(
-                    top: 8,
-                    left: 12,
-                  ),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      errorMessage ?? "",
-                      style: TextStyle(color: MahasColors.danger),
+        Card(
+          child: Visibility(
+            visible: children != null,
+            child: Column(
+              children: [
+                children ?? Container(),
+                Visibility(
+                  visible: errorMessage != null,
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      top: 8,
+                      left: 12,
+                    ),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        errorMessage ?? "",
+                        style: TextStyle(color: MahasColors.danger),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-        Padding(padding: EdgeInsets.all(marginBottom ?? 10)),
+        Padding(padding: EdgeInsets.all(marginBottom ?? 5)),
       ],
     );
   }

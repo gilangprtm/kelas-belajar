@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:uuid/uuid.dart';
 
-import '../mahas_colors.dart';
+import '../../widget/constant.dart';
+import '../../widget/mahas_alert.dart';
 import '../components/mahas_themes.dart';
 
 enum HttpMethod {
@@ -26,120 +26,23 @@ class Helper {
     Color? color,
   }) async {
     return await Get.dialog<bool?>(
-      AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.all(Radius.circular(MahasThemes.borderRadius))),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
+      MahasAlertDialog(
+        alertType: AlertType.confirmation,
+        content: const Column(
           children: [
-            Icon(
-              icon ?? FontAwesomeIcons.question,
-              color: color ?? MahasColors.primary,
-              size: 40,
-            ),
-            const Padding(padding: EdgeInsets.all(10)),
-            Text(
-              message ?? "",
-              textAlign: TextAlign.center,
-            ),
+            Text('Are you sure you want back?'),
           ],
         ),
-        contentPadding:
-            const EdgeInsets.only(bottom: 0, top: 20, right: 20, left: 20),
-        actionsPadding:
-            const EdgeInsets.only(top: 10, bottom: 5, left: 20, right: 20),
-        actions: [
-          TextButton(
-            child: Text(
-              textCancel ?? "Close",
-              style: const TextStyle(
-                color: MahasColors.dark,
-              ),
-            ),
-            onPressed: () {
-              Get.back(result: false);
-            },
-          ),
-          TextButton(
-            child: Text(
-              textConfirm ?? "OK",
-              style: TextStyle(
-                color: color ?? MahasColors.primary,
-              ),
-            ),
-            onPressed: () {
-              Get.back(result: true);
-              confirmAction != null ? confirmAction() : null;
-            },
-          ),
-        ],
+        positiveButtonText: 'Yes',
+        negativeButtonText: 'Cancel',
+        showNegativeButton: true,
+        showPositiveButton: true,
+        onPositivePressed: () {
+          Get.back(result: true);
+          confirmAction != null ? confirmAction() : null;
+        },
+        onNegativePressed: () {},
       ),
-    );
-  }
-
-  static Future<bool?> dialogUpdate({
-    required bool harusUpdate,
-    required String versiTerbaru,
-  }) async {
-    return await Get.dialog<bool?>(
-      AlertDialog(
-        shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.all(Radius.circular(MahasThemes.borderRadius))),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              FontAwesomeIcons.question,
-              color: MahasColors.primary,
-              size: 40,
-            ),
-            const Padding(padding: EdgeInsets.all(10)),
-            Text(
-              "Versi $versiTerbaru sudah tersedia",
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-        contentPadding:
-            const EdgeInsets.only(bottom: 0, top: 20, right: 20, left: 20),
-        actionsPadding:
-            const EdgeInsets.only(top: 10, bottom: 5, left: 20, right: 20),
-        actions: [
-          TextButton(
-            child: Text(
-              harusUpdate ? "Tutup" : "Nanti",
-              style: const TextStyle(
-                color: MahasColors.dark,
-              ),
-            ),
-            onPressed: () {
-              if (harusUpdate) {
-                if (Platform.isAndroid) {
-                  SystemNavigator.pop();
-                } else if (Platform.isIOS) {
-                  exit(0);
-                }
-              } else {
-                Get.back(result: false);
-              }
-            },
-          ),
-          TextButton(
-            child: Text(
-              "Unduh Sekarang",
-              style: TextStyle(
-                color: MahasColors.primary,
-              ),
-            ),
-            onPressed: () {
-              Get.back(result: true);
-            },
-          ),
-        ],
-      ),
-      barrierDismissible: false,
     );
   }
 
@@ -159,17 +62,17 @@ class Helper {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
+            const Icon(
               FontAwesomeIcons.triangleExclamation,
-              color: MahasColors.warning,
+              color: MahasColors.warningColor,
               size: 40,
             ),
             const Padding(padding: EdgeInsets.all(7)),
             Text(
               textAlign: TextAlign.center,
               contentMessage,
-              style: TextStyle(
-                color: MahasColors.warning,
+              style: const TextStyle(
+                color: MahasColors.warningColor,
               ),
             ),
           ],
@@ -184,18 +87,14 @@ class Helper {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
+            const Icon(
               FontAwesomeIcons.checkToSlot,
-              color: MahasColors.primary,
               size: 40,
             ),
             const Padding(padding: EdgeInsets.all(7)),
             Text(
               textAlign: TextAlign.center,
               message ?? "-",
-              style: TextStyle(
-                color: MahasColors.primary,
-              ),
             ),
           ],
         ),
@@ -233,7 +132,7 @@ class Helper {
         decoration: BoxDecoration(
           borderRadius:
               BorderRadius.all(Radius.circular(MahasThemes.borderRadius)),
-          color: MahasColors.light,
+          color: MahasColors.lightBackgroundColor,
         ),
         child: Column(
           children: children,

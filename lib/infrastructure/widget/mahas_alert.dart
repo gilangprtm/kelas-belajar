@@ -43,6 +43,7 @@ class MahasAlertDialog extends StatelessWidget {
       case AlertType.confirmation:
         backgroundColor = this.backgroundColor ?? backgroundColor;
         iconData = Icons.help_outline;
+        iconColor = MahasColors.warningColor;
         title = this.title ?? 'Confirmation';
         break;
       case AlertType.error:

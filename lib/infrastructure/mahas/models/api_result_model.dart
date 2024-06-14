@@ -5,7 +5,7 @@ class ApiResultModel {
   int? statusCode;
 
   ApiResultModel(this.statusCode, this.body) {
-    if (statusCode == 200) {
+    if (statusCode == 200 || statusCode == 201 || statusCode == 202) {
       success = true;
     } else if (statusCode == 400) {
       success = false;
