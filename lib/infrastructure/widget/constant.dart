@@ -11,6 +11,7 @@ class MahasColors {
 
   static const Color errorColor = Color(0xFFE0245E); // Red
   static const Color successColor = Color(0xFF17BF63); // Green
+  static const Color warningColor = Color(0xFFFF8A50);
   static const Color transparent = Colors.transparent;
 
   // Light Mode Colors

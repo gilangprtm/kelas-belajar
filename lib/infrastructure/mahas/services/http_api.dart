@@ -1,6 +1,8 @@
 import 'dart:convert';
 // import 'dart:developer';
 
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '../../../domain/service/mahas_service.dart';
 import '../mahas_config.dart';
 import '../models/api_result_model.dart';
@@ -56,7 +58,14 @@ class HttpApi {
 
       return _getResult(r);
     } catch (ex) {
-      return _getErrorResult(ex);
+      if (ex is FirebaseAuthException && ex.code == 'network-request-failed') {
+        // Handle Firebase network error
+        return ApiResultModel.error(
+          "Error Request \nCek koneksi internet Anda dan coba beberapa saat lagi!",
+        );
+      } else {
+        return _getErrorResult(ex);
+      }
     }
   }
 
@@ -64,26 +73,24 @@ class HttpApi {
     try {
       final token = await _token();
       final urlX = Uri.parse(getUrl(url));
-      var r = await http
-          .post(
+      var r = await http.post(
         urlX,
         headers: {
           'Content-type': 'application/json',
           'Authorization': token != null ? 'Bearer $token' : '',
         },
         body: json.encode(body),
-      )
-          .timeout(
-        const Duration(seconds: 15),
-        onTimeout: () {
-          return http.Response(
-              'Error Request Timeout\nCek koneksi internet Anda dan coba beberapa saat lagi!',
-              408);
-        },
       );
       return _getResult(r);
     } catch (ex) {
-      return _getErrorResult(ex);
+      if (ex is FirebaseAuthException && ex.code == 'network-request-failed') {
+        // Handle Firebase network error
+        return ApiResultModel.error(
+          "Error Request \nCek koneksi internet Anda dan coba beberapa saat lagi!",
+        );
+      } else {
+        return _getErrorResult(ex);
+      }
     }
   }
 
@@ -91,26 +98,24 @@ class HttpApi {
     try {
       final token = await _token();
       final urlX = Uri.parse(getUrl(url));
-      var r = await http
-          .put(
+      var r = await http.put(
         urlX,
         headers: {
           'Content-type': 'application/json',
           'Authorization': token != null ? 'Bearer $token' : '',
         },
         body: json.encode(body),
-      )
-          .timeout(
-        const Duration(seconds: 15),
-        onTimeout: () {
-          return http.Response(
-              'Error Request Timeout\nCek koneksi internet Anda dan coba beberapa saat lagi!',
-              408);
-        },
       );
       return _getResult(r);
     } catch (ex) {
-      return _getErrorResult(ex);
+      if (ex is FirebaseAuthException && ex.code == 'network-request-failed') {
+        // Handle Firebase network error
+        return ApiResultModel.error(
+          "Error Request \nCek koneksi internet Anda dan coba beberapa saat lagi!",
+        );
+      } else {
+        return _getErrorResult(ex);
+      }
     }
   }
 
@@ -118,26 +123,24 @@ class HttpApi {
     try {
       final token = await _token();
       final urlX = Uri.parse(getUrl(url));
-      var r = await http
-          .delete(
+      var r = await http.delete(
         urlX,
         headers: {
           'Content-type': 'application/json',
           'Authorization': token != null ? 'Bearer $token' : '',
         },
         body: json.encode(body),
-      )
-          .timeout(
-        const Duration(seconds: 15),
-        onTimeout: () {
-          return http.Response(
-              'Error Request Timeout\nCek koneksi internet Anda dan coba beberapa saat lagi!',
-              408);
-        },
       );
       return _getResult(r);
     } catch (ex) {
-      return _getErrorResult(ex);
+      if (ex is FirebaseAuthException && ex.code == 'network-request-failed') {
+        // Handle Firebase network error
+        return ApiResultModel.error(
+          "Error Request \nCek koneksi internet Anda dan coba beberapa saat lagi!",
+        );
+      } else {
+        return _getErrorResult(ex);
+      }
     }
   }
 }

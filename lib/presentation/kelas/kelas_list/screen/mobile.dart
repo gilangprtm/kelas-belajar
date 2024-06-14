@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kelas_belajar/infrastructure/mahas/mahas_config.dart';
 import 'package:kelas_belajar/infrastructure/widget/constant.dart';
 
 import '../../../../infrastructure/mahas/components/inputs/input_text_component.dart';
@@ -18,29 +19,25 @@ class MobileLayout extends GetView<KelasListController> {
         Row(
           children: [
             const Spacer(),
-            Card(
-              child: SizedBox(
-                width: context.width * 0.8,
-                child: InputTextComponent(
-                  placeHolder: "Cari Kelas Belajar",
-                  marginBottom: 0,
-                  controller: controller.searchCon,
-                  editable: true,
-                ),
+            SizedBox(
+              width: context.width * 0.85,
+              child: InputTextComponent(
+                placeHolder: "Cari Kelas Belajar",
+                marginBottom: 0,
+                controller: controller.searchCon,
+                editable: true,
               ),
             ),
-            Card(
-              child: MahasButton(
-                icon: const Icon(
-                  Icons.filter_list,
-                  size: 24.0,
-                ),
-                onPressed: () {
-                  controller.getAllKelas();
-                },
-                type: ButtonType.icon,
-                borderRadius: MahasBorderRadius.large,
+            MahasButton(
+              icon: const Icon(
+                Icons.filter_list,
+                size: 24.0,
               ),
+              onPressed: () {
+                controller.getAllKelas();
+              },
+              type: ButtonType.icon,
+              borderRadius: MahasBorderRadius.large,
             ),
             const Spacer(),
           ],
@@ -51,6 +48,20 @@ class MobileLayout extends GetView<KelasListController> {
                 items: controller.items.value,
               ),
             )),
+        Visibility(
+          visible: MahasConfig.userModel?.role == 'Guru',
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: MahasButton(
+              isFullWidth: true,
+              text: 'Buat Kelas',
+              onPressed: () {
+                controller.createKelas();
+              },
+              borderRadius: MahasBorderRadius.large,
+            ),
+          ),
+        ),
       ],
     );
   }

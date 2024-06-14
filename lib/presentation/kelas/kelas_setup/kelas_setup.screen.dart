@@ -2,23 +2,20 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
+import '../../../infrastructure/widget/mahas_responsive.dart';
 import 'controllers/kelas_setup.controller.dart';
+import 'screen/desktop.dart';
+import 'screen/mobile.dart';
+import 'screen/tablet.dart';
 
 class KelasSetupScreen extends GetView<KelasSetupController> {
-  const KelasSetupScreen({Key? key}) : super(key: key);
+  const KelasSetupScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('KelasSetupScreen'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'KelasSetupScreen is working',
-          style: TextStyle(fontSize: 20),
-        ),
-      ),
+    return const MahasResponsive(
+      mobile: MobileLayout(),
+      tablet: TabletLayout(),
+      desktop: DesktopLayout(),
     );
   }
 }

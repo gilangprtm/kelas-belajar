@@ -18,27 +18,23 @@ class MobileLayout extends GetView<ModuleController> {
         Row(
           children: [
             const Spacer(),
-            Card(
-              child: SizedBox(
-                width: context.width * 0.8,
-                child: InputTextComponent(
-                  placeHolder: "Cari Modul Belajar",
-                  marginBottom: 0,
-                  controller: controller.searchCon,
-                  editable: true,
-                ),
+            SizedBox(
+              width: context.width * 0.85,
+              child: InputTextComponent(
+                placeHolder: "Cari Modul Belajar",
+                marginBottom: 0,
+                controller: controller.searchCon,
+                editable: true,
               ),
             ),
-            Card(
-              child: MahasButton(
-                icon: const Icon(
-                  Icons.filter_list,
-                  size: 24.0,
-                ),
-                onPressed: () {},
-                type: ButtonType.icon,
-                borderRadius: MahasBorderRadius.large,
+            MahasButton(
+              icon: const Icon(
+                Icons.filter_list,
+                size: 24.0,
               ),
+              onPressed: () {},
+              type: ButtonType.icon,
+              borderRadius: MahasBorderRadius.large,
             ),
             const Spacer(),
           ],
