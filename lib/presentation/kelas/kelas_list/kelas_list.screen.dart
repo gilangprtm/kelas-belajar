@@ -19,6 +19,7 @@ class KelasListScreen extends GetView<KelasListController> {
         title: const Text('Kelas Belajar'),
         centerTitle: true,
         backgroundColor: MahasColors.transparent,
+        surfaceTintColor: MahasColors.transparent,
         iconTheme:
             const IconThemeData(color: MahasColors.darkSecondaryLightColor),
       ),
