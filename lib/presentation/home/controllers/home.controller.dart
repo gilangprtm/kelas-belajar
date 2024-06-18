@@ -58,7 +58,12 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
-  void cariKelas() {
-    Get.toNamed(Routes.KELAS_LIST);
+  void cariKelas({bool? spesifik}) {
+    Get.toNamed(
+      Routes.KELAS_LIST,
+      arguments: {
+        'spesifik': spesifik,
+      },
+    );
   }
 }

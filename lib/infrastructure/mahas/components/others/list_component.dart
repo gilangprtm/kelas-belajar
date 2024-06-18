@@ -8,6 +8,11 @@ import '../inputs/input_text_component.dart';
 import 'empty_component.dart';
 import 'shimmer_component.dart';
 
+enum ViewType {
+  list,
+  grid,
+}
+
 class ListComponentController<T> {
   final Function(int index, String filter) urlApi;
   final T Function(dynamic e) fromDynamic;
@@ -119,6 +124,7 @@ class ListComponentController<T> {
 }
 
 class ListComponent<T> extends StatefulWidget {
+  final ViewType viewType;
   final ListComponentController<T> controller;
   final Widget Function(T e) itemBuilder;
   final bool allowMenuAction;
@@ -135,6 +141,7 @@ class ListComponent<T> extends StatefulWidget {
     this.listMenuAction,
     this.separatorBuilder,
     this.emptyBuilder,
+    this.viewType = ViewType.list,
   });
 
   @override
@@ -175,37 +182,68 @@ class _ListComponentState<T> extends State<ListComponent<T>> {
                     ? widget.emptyBuilder != null
                         ? widget.emptyBuilder!
                         : EmptyComponent(onPressed: widget.controller.refresh)
-                    : ListView.separated(
-                        separatorBuilder: widget.separatorBuilder != null
-                            ? (context, index) => widget.separatorBuilder!(
-                                context, index, widget.controller._items.length)
-                            : (context, index) => const Divider(height: 0),
-                        controller: widget.controller._listViewController,
-                        physics: const AlwaysScrollableScrollPhysics(),
-                        itemCount: widget.controller._items.length +
-                            (MahasConfig.isLaravelBackend ? 1 : 0),
-                        itemBuilder: (context, index) {
-                          if (index == widget.controller._items.length) {
-                            return Visibility(
-                              visible: widget.controller._pageIndex !=
-                                      widget.controller._maxPage &&
-                                  widget.controller._items.isNotEmpty,
-                              child: Container(
-                                margin: const EdgeInsets.all(10),
-                                child: const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              ),
-                            );
-                          } else {
-                            return widget
-                                .itemBuilder(widget.controller._items[index]);
-                          }
-                        },
-                      ),
+                    : widget.viewType == ViewType.list
+                        ? listView()
+                        : gridView(),
           ),
         )
       ],
+    );
+  }
+
+  ListView listView() {
+    return ListView.builder(
+      controller: widget.controller._listViewController,
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: widget.controller._items.length +
+          (MahasConfig.isLaravelBackend ? 1 : 0),
+      itemBuilder: (context, index) {
+        if (index == widget.controller._items.length) {
+          return Visibility(
+            visible:
+                widget.controller._pageIndex != widget.controller._maxPage &&
+                    widget.controller._items.isNotEmpty,
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        } else {
+          return widget.itemBuilder(widget.controller._items[index]);
+        }
+      },
+    );
+  }
+
+  Widget gridView() {
+    return GridView.builder(
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2, // Change as needed
+        childAspectRatio: 1, // Change as needed
+      ),
+      controller: widget.controller._listViewController,
+      physics: const AlwaysScrollableScrollPhysics(),
+      itemCount: widget.controller._items.length +
+          (MahasConfig.isLaravelBackend ? 1 : 0),
+      itemBuilder: (context, index) {
+        if (index == widget.controller._items.length) {
+          return Visibility(
+            visible:
+                widget.controller._pageIndex != widget.controller._maxPage &&
+                    widget.controller._items.isNotEmpty,
+            child: Container(
+              margin: const EdgeInsets.all(10),
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          );
+        } else {
+          return widget.itemBuilder(widget.controller._items[index]);
+        }
+      },
     );
   }
 }

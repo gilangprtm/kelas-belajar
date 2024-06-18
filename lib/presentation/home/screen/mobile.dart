@@ -58,9 +58,9 @@ class MobileLayout extends GetView<HomeController> {
                   height: 15,
                 ),
                 MahasButton(
-                  text: 'Cari Kelasmu',
+                  text: 'Semua Kelas',
                   onPressed: () {
-                    controller.cariKelas();
+                    controller.cariKelas(spesifik: false);
                   },
                   type: ButtonType.primary,
                   height: 52,
@@ -102,7 +102,9 @@ class MobileLayout extends GetView<HomeController> {
                         style: MahasTypography.headline6),
                     MahasButton(
                       text: 'All',
-                      onPressed: () {},
+                      onPressed: () {
+                        controller.cariKelas(spesifik: true);
+                      },
                       type: ButtonType.text,
                       borderRadius: MahasBorderRadius.extraLarge,
                     ),
